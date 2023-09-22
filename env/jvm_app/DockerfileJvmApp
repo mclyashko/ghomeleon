@@ -1,0 +1,12 @@
+FROM gradle:7.6.2-jdk17 as builder
+WORKDIR /application
+COPY settings.gradle.kts /application/
+COPY build.gradle.kts /application/
+COPY buildSrc /application/buildSrc
+COPY . /application/
+RUN gradle clean test build
+
+FROM openjdk:17 as backend
+WORKDIR /root
+COPY --from=builder /application/app/build/libs/app.jar ./jar/
+ENTRYPOINT ["java", "-jar", "jar/app.jar"]

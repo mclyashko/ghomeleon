@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: ghomeleon
+  datasource:
+    url: ${POSTGRES_URL}${POSTGRES_DB}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
