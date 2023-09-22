@@ -8,13 +8,14 @@ import ru.mirea.ghomeleon.domain.game.declaration.GameAlreadyExists
 import ru.mirea.ghomeleon.domain.game.declaration.GameIdGenerator
 import ru.mirea.ghomeleon.domain.platform.Platform
 import java.time.LocalDate
+import kotlin.jvm.Throws
 
 class Game internal constructor(
     id: Id,
     val name: Name,
     val description: Description,
     val reviews: List<Review>,
-    val releaseInfos: List<ReleaseInfo>,
+    val releases: List<Release>,
 ) : AggregateRoot<Game.Id>(id = id) {
     data class Id(
         private val value: Long,
@@ -51,11 +52,11 @@ class Game internal constructor(
         }
     }
 
-    class ReleaseInfo(
+    class Release(
         id: Id,
         val releaseDate: ReleaseDate,
         val platformId: Platform.Id,
-    ) : DomainEntity<ReleaseInfo.Id>(id = id) {
+    ) : DomainEntity<Release.Id>(id = id) {
         data class Id(
             private val value: Long,
         ) : ValueObject {
@@ -70,6 +71,7 @@ class Game internal constructor(
     }
 
     companion object {
+        @Throws(DomainException.GameAlreadyExistsException::class)
         fun addGame(
             gameIdGenerator: GameIdGenerator,
             gameAlreadyExists: GameAlreadyExists,
@@ -78,7 +80,7 @@ class Game internal constructor(
         ): Game {
             if (gameAlreadyExists(name)) {
                 throw DomainException.GameAlreadyExistsException(
-                    "Game with ${name.toStringValue()} already exists!"
+                    "Game with name '${name.toStringValue()}' already exists!"
                 )
             }
 
@@ -89,7 +91,7 @@ class Game internal constructor(
                 name = name,
                 description = description,
                 reviews = emptyList(),
-                releaseInfos = emptyList(),
+                releases = emptyList(),
             )
         }
     }

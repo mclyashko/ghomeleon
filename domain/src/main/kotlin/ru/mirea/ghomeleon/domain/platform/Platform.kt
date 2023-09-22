@@ -6,6 +6,7 @@ import ru.mirea.ghomeleon.domain.common.design.exception.DomainException
 import ru.mirea.ghomeleon.domain.platform.declaration.PlatformAlreadyExists
 import ru.mirea.ghomeleon.domain.platform.declaration.PlatformIdGenerator
 import java.time.LocalDate
+import kotlin.jvm.Throws
 
 class Platform internal constructor(
     id: Id,
@@ -49,15 +50,17 @@ class Platform internal constructor(
                      manufacturer.toStringValue()
                 }
 
+            @Throws(DomainException.UnknownManufacturerNameException::class)
             fun from(name: String): Manufacturer =
                 mapByValue[name]
                     ?: throw DomainException.UnknownManufacturerNameException(
-                        "Manufacturer with $name is unknown!"
+                        "Manufacturer with name '$name' is unknown!"
                     )
         }
     }
 
     companion object {
+        @Throws(DomainException.PlatformAlreadyExistsException::class)
         fun addPlatform(
             platformIdGenerator: PlatformIdGenerator,
             platformAlreadyExists: PlatformAlreadyExists,
@@ -67,7 +70,7 @@ class Platform internal constructor(
         ): Platform {
             if (platformAlreadyExists(name)) {
                 throw DomainException.PlatformAlreadyExistsException(
-                    "Platform with ${name.toStringValue()} already exists!"
+                    "Platform with name '${name.toStringValue()}' already exists!"
                 )
             }
 
