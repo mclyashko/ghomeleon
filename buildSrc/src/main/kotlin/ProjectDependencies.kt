@@ -1,10 +1,14 @@
 object LibVers {
     const val spring_boot = "3.1.4"
+    const val spring_cloud = "2022.0.4"
     const val junit = "5.10.0"
+    const val random_beans = "2.6.0"
+    const val testcontainers = "1.19.0"
     const val jackson = "2.15.2"
     const val slf4j = "2.0.9"
     const val postgresql = "42.6.0"
     const val flyway = "9.22.2"
+    const val openapi = "2.2.0"
 }
 
 object Libs {
@@ -32,10 +36,23 @@ object Libs {
     // Tests
     const val junit_params = "org.junit.jupiter:junit-jupiter-params:${LibVers.junit}"
     const val junit_engine = "org.junit.jupiter:junit-jupiter-engine:${LibVers.junit}"
+    const val random_beans = "io.github.glytching:junit-extensions:${LibVers.random_beans}"
+    const val testcontainers = "org.testcontainers:testcontainers:${LibVers.testcontainers}"
+    const val testcontainers_junit = "org.testcontainers:junit-jupiter:${LibVers.testcontainers}"
+    const val testcontainers_postgresql = "org.testcontainers:postgresql:${LibVers.testcontainers}"
 
     // Database
     const val postgresql = "org.postgresql:postgresql:${LibVers.postgresql}"
     const val flyway = "org.flywaydb:flyway-core:${LibVers.flyway}"
+
+    // Openapi
+    const val openapi = "org.springdoc:springdoc-openapi-starter-webmvc-ui:${LibVers.openapi}"
+}
+
+object BOMs {
+    const val spring_boot_bom = "org.springframework.boot:spring-boot-dependencies:${LibVers.spring_boot}"
+    const val spring_cloud_bom = "org.springframework.cloud:spring-cloud-dependencies:${LibVers.spring_cloud}"
+    const val test_containers_bom = "org.testcontainers:testcontainers-bom:${LibVers.testcontainers}"
 }
 
 object PluginVers {

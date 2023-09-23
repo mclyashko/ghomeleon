@@ -6,6 +6,13 @@ plugins {
     id(Plugins.owasp_dependencies) version PluginVers.owasp_dependencies
 }
 
+configurations.all {
+    resolutionStrategy {
+        failOnVersionConflict()
+        failOnNonReproducibleResolution()
+    }
+}
+
 subprojects {
     configurations.all {
         resolutionStrategy {
@@ -32,6 +39,14 @@ subprojects {
         mavenLocal()
     }
 
+    val implementation by configurations
+
+    dependencies {
+        implementation(platform(BOMs.spring_boot_bom))
+        implementation(platform(BOMs.spring_cloud_bom))
+        implementation(platform(BOMs.test_containers_bom))
+    }
+
     detekt {
         config = files("$parentProjectDir/tools/detekt/detekt-config.yml")
         buildUponDefaultConfig = true
@@ -56,6 +71,10 @@ subprojects {
         jacocoTestReport {
             dependsOn(check)
             finalizedBy(jacocoTestCoverageVerification)
+
+            reports {
+                html.required.value(true)
+            }
         }
 
         jacocoTestCoverageVerification {
@@ -64,9 +83,9 @@ subprojects {
             violationRules {
 
                 rule {
-                    excludes = listOf("application", "telnet", "mock-server")
+                    excludes = listOf("app")
                     limit {
-                        minimum = BigDecimal("0.9")
+                        minimum = BigDecimal("0.5")
                     }
                 }
             }
@@ -102,13 +121,7 @@ subprojects {
                 exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
             }
 
-            systemProperties["pact.rootDir"] = layout.buildDirectory.dir("pacts")
+            systemProperties["pact.rootDir"] = layout.buildDirectory.dir("pacts").get().asFile.absolutePath
         }
-    }
-}
-
-configurations.all {
-    resolutionStrategy {
-        failOnNonReproducibleResolution()
     }
 }

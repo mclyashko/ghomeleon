@@ -1,3 +1,7 @@
+plugins {
+    id(Plugins.spring_kotlin) version PluginVers.spring_kotlin
+}
+
 dependencies {
     implementation(project(":use-case"))
     implementation(project(":domain"))
@@ -9,6 +13,9 @@ dependencies {
 
     // spring
     implementation(Libs.spring_boot_starter_web)
+
+    // openapi
+    implementation(Libs.openapi)
 
     // tests
     testImplementation(Libs.junit_params)

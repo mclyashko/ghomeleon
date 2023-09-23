@@ -14,6 +14,10 @@ class Platform internal constructor(
     val releaseDate: ReleaseDate,
     val manufacturer: Manufacturer,
 ) : AggregateRoot<Platform.Id>(id = id) {
+
+    var removed: Boolean = false
+        internal set
+
     data class Id(
         private val value: Long,
     ) : ValueObject {
@@ -47,7 +51,7 @@ class Platform internal constructor(
         companion object {
             private val mapByValue: Map<String, Manufacturer> =
                 Manufacturer.values().associateBy { manufacturer ->
-                     manufacturer.toStringValue()
+                    manufacturer.toStringValue()
                 }
 
             @Throws(DomainException.UnknownManufacturerNameException::class)
@@ -82,6 +86,23 @@ class Platform internal constructor(
                 releaseDate = releaseDate,
                 manufacturer = manufacturer,
             )
+        }
+
+        fun restorePlatform(
+            id: Id,
+            name: Name,
+            releaseDate: ReleaseDate,
+            manufacturer: Manufacturer,
+            removed: Boolean,
+        ): Platform {
+            return Platform(
+                id = id,
+                name = name,
+                releaseDate = releaseDate,
+                manufacturer = manufacturer,
+            ).apply {
+                this.removed = removed
+            }
         }
     }
 }

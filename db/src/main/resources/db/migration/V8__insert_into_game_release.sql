@@ -1,0 +1,27 @@
+insert into game_release
+    (id, date, game_id, platform_id)
+values (nextval('game_release_id_seq'), '2006-05-15',
+        (select id from game where game.name = 'New Super Mario Bros.'),
+        (select id from platform where platform.name = 'Nintendo DS')),
+       (nextval('game_release_id_seq'), '2019-10-15',
+        (select id from game where game.name = 'Disco Elysium'),
+        (select id from platform where platform.name = 'Nintendo Switch')),
+       (nextval('game_release_id_seq'), '2019-10-15',
+        (select id from game where game.name = 'Disco Elysium'),
+        (select id from platform where platform.name = 'PlayStation 5')),
+       (nextval('game_release_id_seq'), '2019-10-15',
+        (select id from game where game.name = 'Disco Elysium'),
+        (select id from platform where platform.name = 'Xbox Series X')),
+       (nextval('game_release_id_seq'), '2023-02-21',
+        (select id from game where game.name = 'Atomic Heart'),
+        (select id from platform where platform.name = 'PlayStation 5')),
+       (nextval('game_release_id_seq'), '2023-02-21',
+        (select id from game where game.name = 'Atomic Heart'),
+        (select id from platform where platform.name = 'Xbox Series X')),
+       (nextval('game_release_id_seq'), '2000-10-25',
+        (select id from game where game.name = 'Demolition Racer: No Exit'),
+        (select id from platform where platform.name = 'Dreamcast')),
+       (nextval('game_release_id_seq'), '1993-11-23',
+        (select id from game where game.name = 'Cybermorph'),
+        (select id from platform where platform.name = 'Atari Jaguar'));
+

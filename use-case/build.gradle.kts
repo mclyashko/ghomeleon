@@ -1,3 +1,7 @@
+plugins {
+    id(Plugins.spring_kotlin) version PluginVers.spring_kotlin
+}
+
 dependencies {
     implementation(project(":domain"))
 

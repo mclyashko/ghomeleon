@@ -8,7 +8,6 @@ import ru.mirea.ghomeleon.domain.game.declaration.GameAlreadyExists
 import ru.mirea.ghomeleon.domain.game.declaration.GameIdGenerator
 import ru.mirea.ghomeleon.domain.platform.Platform
 import java.time.LocalDate
-import kotlin.jvm.Throws
 
 class Game internal constructor(
     id: Id,
@@ -17,6 +16,10 @@ class Game internal constructor(
     val reviews: List<Review>,
     val releases: List<Release>,
 ) : AggregateRoot<Game.Id>(id = id) {
+
+    var removed: Boolean = false
+        internal set
+
     data class Id(
         private val value: Long,
     ) : ValueObject {
@@ -35,10 +38,17 @@ class Game internal constructor(
         fun toStringValue(): String = value
     }
 
-    data class Review(
+    class Review(
+        id: Id,
         val mark: Mark,
         val text: Text,
-    ) : ValueObject {
+    ) : DomainEntity<Review.Id>(id = id) {
+        data class Id(
+            private val value: Long,
+        ) : ValueObject {
+            fun toLongValue(): Long = value
+        }
+
         data class Mark(
             private val value: Byte,
         ) : ValueObject {
@@ -54,7 +64,7 @@ class Game internal constructor(
 
     class Release(
         id: Id,
-        val releaseDate: ReleaseDate,
+        val date: Date,
         val platformId: Platform.Id,
     ) : DomainEntity<Release.Id>(id = id) {
         data class Id(
@@ -63,7 +73,7 @@ class Game internal constructor(
             fun toLongValue(): Long = value
         }
 
-        data class ReleaseDate(
+        data class Date(
             private val value: LocalDate,
         ) : ValueObject {
             fun toLocalDateValue(): LocalDate = value
@@ -93,6 +103,25 @@ class Game internal constructor(
                 reviews = emptyList(),
                 releases = emptyList(),
             )
+        }
+
+        fun restoreGame(
+            id: Id,
+            name: Name,
+            description: Description,
+            reviews: List<Review>,
+            releases: List<Release>,
+            removed: Boolean,
+        ): Game {
+            return Game(
+                id = id,
+                name = name,
+                description = description,
+                reviews = reviews,
+                releases = releases
+            ).apply {
+                this.removed = removed
+            }
         }
     }
 }

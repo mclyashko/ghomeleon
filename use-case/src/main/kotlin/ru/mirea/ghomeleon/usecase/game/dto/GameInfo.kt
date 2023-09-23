@@ -7,12 +7,18 @@ data class GameInfo(
     val id: Game.Id,
     val name: Game.Name,
     val description: Game.Description,
-    val reviews: List<Game.Review>,
-    val releaseInfos: List<ReleaseInfo>,
+    val reviews: List<Review>,
+    val releases: List<Release>,
 ) {
-    data class ReleaseInfo(
+    data class Review(
+        val id: Game.Review.Id,
+        val mark: Game.Review.Mark,
+        val text: Game.Review.Text,
+    )
+
+    data class Release(
         val id: Game.Release.Id,
-        val releaseDate: Game.Release.ReleaseDate,
+        val date: Game.Release.Date,
         val platformId: Platform.Id,
     )
 }

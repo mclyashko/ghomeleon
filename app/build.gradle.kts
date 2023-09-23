@@ -15,9 +15,44 @@ dependencies {
     implementation(Libs.kotlin_stdlib)
 
     // spring
-    implementation(Libs.spring_boot_starter)
+    implementation(Libs.spring_boot_starter_web)
+
+    // jackson
+    implementation(Libs.jackson_kotlin)
 
     // tests
     testImplementation(Libs.junit_params)
+    testImplementation(Libs.spring_boot_starter_test)
+    testImplementation(Libs.random_beans)
+    testImplementation(Libs.testcontainers)
+    testImplementation(Libs.testcontainers_junit)
+    testImplementation(Libs.testcontainers_postgresql)
     testRuntimeOnly(Libs.junit_engine)
+}
+
+val testIntSourceSet: SourceSet = sourceSets.create("testInt") {
+    compileClasspath += sourceSets.main.get().output + sourceSets.test.get().output
+    runtimeClasspath += sourceSets.main.get().output + sourceSets.test.get().output
+}
+
+val testIntImplementation: Configuration by configurations.getting {
+    extendsFrom(configurations.testImplementation.get())
+}
+
+val testInt by tasks.registering(Test::class) {
+    testClassesDirs = testIntSourceSet.output.classesDirs
+    classpath = testIntSourceSet.runtimeClasspath
+
+    group = "verification"
+    description = "Runs integration tests"
+
+    useJUnitPlatform()
+}
+
+tasks.check {
+    dependsOn(testInt)
+}
+
+tasks.bootJar {
+    archiveFileName.set("${rootProject.name}.jar")
 }

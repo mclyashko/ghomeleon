@@ -1,4 +1,4 @@
-package ru.mirea.ghomeleon.app
+package ru.mirea.ghomeleon
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class GhomeleonApp
 
 fun main(args: Array<String>) {
-    runApplication<GhomeleonApp>(*args)
+    runApplication<GhomeleonApp>(args = args)
 }
