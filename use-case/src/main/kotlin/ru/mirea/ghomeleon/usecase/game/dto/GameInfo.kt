@@ -9,6 +9,7 @@ data class GameInfo(
     val description: Game.Description,
     val reviews: List<Review>,
     val releases: List<Release>,
+    val removed: Boolean,
 ) {
     data class Review(
         val id: Game.Review.Id,

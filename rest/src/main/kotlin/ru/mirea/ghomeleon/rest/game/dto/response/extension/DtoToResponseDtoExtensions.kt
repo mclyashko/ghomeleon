@@ -12,7 +12,8 @@ fun GameInfo.toResponseDto(): GameResponse = GameResponse(
     },
     releases = releases.map { release ->
         release.toResponseDto()
-    }
+    },
+    removed = removed,
 )
 
 fun GameInfo.Review.toResponseDto(): GameResponse.Review = GameResponse.Review(

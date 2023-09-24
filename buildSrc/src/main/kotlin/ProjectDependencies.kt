@@ -1,4 +1,5 @@
 object LibVers {
+    const val spring = "6.0.12"
     const val spring_boot = "3.1.4"
     const val spring_cloud = "2022.0.4"
     const val junit = "5.10.0"
@@ -29,6 +30,7 @@ object Libs {
         LibVers.spring_boot
     }"
     const val spring_boot_starter_test = "org.springframework.boot:spring-boot-starter-test:${LibVers.spring_boot}"
+    const val spring_transaction = "org.springframework:spring-tx:${LibVers.spring}"
 
     // Logging
     const val slf4j_api = "org.slf4j:slf4j-api:${LibVers.slf4j}"

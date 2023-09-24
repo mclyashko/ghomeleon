@@ -8,4 +8,5 @@ internal fun Platform.toPlatformInfoDto(): PlatformInfo = PlatformInfo(
     name = name,
     releaseDate = releaseDate,
     manufacturer = manufacturer,
+    removed = removed,
 )

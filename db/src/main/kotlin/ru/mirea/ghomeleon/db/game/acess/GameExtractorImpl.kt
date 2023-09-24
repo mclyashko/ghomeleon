@@ -7,7 +7,7 @@ import ru.mirea.ghomeleon.db.game.repository.ReleaseRepository
 import ru.mirea.ghomeleon.db.game.repository.ReviewRepository
 import ru.mirea.ghomeleon.domain.game.Game
 import ru.mirea.ghomeleon.domain.platform.Platform
-import ru.mirea.ghomeleon.usecase.game.declaration.GameExtractor
+import ru.mirea.ghomeleon.usecase.game.declaration.acess.GameExtractor
 import kotlin.jvm.optionals.getOrNull
 
 @Repository
@@ -54,14 +54,14 @@ class GameExtractorImpl(
             name = Game.Name(gameEntity.name),
             description = Game.Description(gameEntity.description),
             reviews = reviewEntities.map { reviewEntity ->
-                Game.Review(
+                Game.Review.restoreReview(
                     id = Game.Review.Id(reviewEntity.id),
                     mark = Game.Review.Mark(reviewEntity.mark),
                     text = Game.Review.Text(reviewEntity.text),
                 )
             },
             releases = releaseEntities.map { releaseEntity ->
-                Game.Release(
+                Game.Release.restoreRelease(
                     id = Game.Release.Id(releaseEntity.id),
                     date = Game.Release.Date(releaseEntity.date),
                     platformId = Platform.Id(releaseEntity.platformId),

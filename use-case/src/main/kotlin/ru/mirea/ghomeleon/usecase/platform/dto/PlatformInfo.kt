@@ -7,4 +7,5 @@ data class PlatformInfo(
     val name: Platform.Name,
     val releaseDate: Platform.ReleaseDate,
     val manufacturer: Platform.Manufacturer,
+    val removed: Boolean,
 )

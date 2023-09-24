@@ -29,7 +29,47 @@ sealed class DomainException(
         cause: Throwable? = null,
     ) : DomainException(message = message, cause = cause)
 
+    class GetGameByNameNotFoundException(
+        message: String? = null,
+        cause: Throwable? = null,
+    ) : DomainException(message = message, cause = cause)
+
+    class AddNewGameReviewByIdNotFoundException(
+        message: String? = null,
+        cause: Throwable? = null,
+    ) : DomainException(message = message, cause = cause)
+
+    class AddNewGameReleaseByIdNotFoundException(
+        message: String? = null,
+        cause: Throwable? = null,
+    ) : DomainException(message = message, cause = cause)
+
+    class UpdateGameByIdNotFoundException(
+        message: String? = null,
+        cause: Throwable? = null,
+    ) : DomainException(message = message, cause = cause)
+
+    class RemoveGameByIdNotFoundException(
+        message: String? = null,
+        cause: Throwable? = null,
+    ) : DomainException(message = message, cause = cause)
+
     class GetPlatformByIdNotFoundException(
+        message: String? = null,
+        cause: Throwable? = null,
+    ) : DomainException(message = message, cause = cause)
+
+    class GetPlatformByNameNotFoundException(
+        message: String? = null,
+        cause: Throwable? = null,
+    ) : DomainException(message = message, cause = cause)
+
+    class UpdatePlatformByIdNotFoundException(
+        message: String? = null,
+        cause: Throwable? = null,
+    ) : DomainException(message = message, cause = cause)
+
+    class RemovePlatformByIdNotFoundException(
         message: String? = null,
         cause: Throwable? = null,
     ) : DomainException(message = message, cause = cause)

@@ -6,16 +6,19 @@ import ru.mirea.ghomeleon.domain.common.design.entity.ValueObject
 import ru.mirea.ghomeleon.domain.common.design.exception.DomainException
 import ru.mirea.ghomeleon.domain.game.declaration.GameAlreadyExists
 import ru.mirea.ghomeleon.domain.game.declaration.GameIdGenerator
+import ru.mirea.ghomeleon.domain.game.declaration.ReleaseIdGenerator
+import ru.mirea.ghomeleon.domain.game.declaration.ReviewIdGenerator
 import ru.mirea.ghomeleon.domain.platform.Platform
 import java.time.LocalDate
 
 class Game internal constructor(
     id: Id,
+    isNew: Boolean,
     val name: Name,
     val description: Description,
     val reviews: List<Review>,
     val releases: List<Release>,
-) : AggregateRoot<Game.Id>(id = id) {
+) : AggregateRoot<Game.Id>(id = id, isNew = isNew) {
 
     var removed: Boolean = false
         internal set
@@ -38,11 +41,12 @@ class Game internal constructor(
         fun toStringValue(): String = value
     }
 
-    class Review(
+    class Review internal constructor(
         id: Id,
+        isNew: Boolean,
         val mark: Mark,
         val text: Text,
-    ) : DomainEntity<Review.Id>(id = id) {
+    ) : DomainEntity<Review.Id>(id = id, isNew = isNew) {
         data class Id(
             private val value: Long,
         ) : ValueObject {
@@ -60,13 +64,48 @@ class Game internal constructor(
         ) : ValueObject {
             fun toStringValue(): String = value
         }
+
+        companion object {
+            fun addReview(
+                reviewIdGenerator: ReviewIdGenerator,
+                mark: Mark,
+                text: Text,
+            ): Review {
+                val id = reviewIdGenerator.generate()
+
+                return Review(
+                    id = id,
+                    isNew = true,
+                    mark = mark,
+                    text = text,
+                )
+            }
+
+            fun restoreReview(
+                id: Id,
+                mark: Mark,
+                text: Text,
+            ): Review {
+                return Review(
+                    id = id,
+                    isNew = false,
+                    mark = mark,
+                    text = text,
+                )
+            }
+        }
+
+        override fun markPersistedCascade() {
+            isNew = false
+        }
     }
 
-    class Release(
+    class Release internal constructor(
         id: Id,
+        isNew: Boolean,
         val date: Date,
         val platformId: Platform.Id,
-    ) : DomainEntity<Release.Id>(id = id) {
+    ) : DomainEntity<Release.Id>(id = id, isNew = isNew) {
         data class Id(
             private val value: Long,
         ) : ValueObject {
@@ -77,6 +116,40 @@ class Game internal constructor(
             private val value: LocalDate,
         ) : ValueObject {
             fun toLocalDateValue(): LocalDate = value
+        }
+
+        companion object {
+            fun addRelease(
+                releaseIdGenerator: ReleaseIdGenerator,
+                date: Date,
+                platformId: Platform.Id,
+            ): Release {
+                val id = releaseIdGenerator.generate()
+
+                return Release(
+                    id = id,
+                    isNew = true,
+                    date = date,
+                    platformId = platformId,
+                )
+            }
+
+            fun restoreRelease(
+                id: Id,
+                date: Date,
+                platformId: Platform.Id,
+            ): Release {
+                return Release(
+                    id = id,
+                    isNew = false,
+                    date = date,
+                    platformId = platformId,
+                )
+            }
+        }
+
+        override fun markPersistedCascade() {
+            isNew = false
         }
     }
 
@@ -98,6 +171,7 @@ class Game internal constructor(
 
             return Game(
                 id = id,
+                isNew = true,
                 name = name,
                 description = description,
                 reviews = emptyList(),
@@ -115,6 +189,7 @@ class Game internal constructor(
         ): Game {
             return Game(
                 id = id,
+                isNew = false,
                 name = name,
                 description = description,
                 reviews = reviews,
@@ -122,6 +197,16 @@ class Game internal constructor(
             ).apply {
                 this.removed = removed
             }
+        }
+    }
+
+    override fun markPersistedCascade() {
+        isNew = false
+        reviews.map { review ->
+            review.markPersistedCascade()
+        }
+        releases.map { release ->
+            release.markPersistedCascade()
         }
     }
 }

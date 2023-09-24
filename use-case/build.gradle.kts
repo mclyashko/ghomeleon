@@ -12,6 +12,7 @@ dependencies {
 
     // spring
     implementation(Libs.spring_boot_starter)
+    implementation(Libs.spring_transaction)
 
     // tests
     testImplementation(Libs.junit_params)

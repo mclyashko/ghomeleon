@@ -2,4 +2,8 @@ package ru.mirea.ghomeleon.domain.common.design.entity
 
 abstract class DomainEntity<T> protected constructor(
     val id: T,
-) : ValueObject
+    internal var isNew: Boolean,
+) : ValueObject {
+    fun isNew(): Boolean = isNew
+    abstract fun markPersistedCascade()
+}

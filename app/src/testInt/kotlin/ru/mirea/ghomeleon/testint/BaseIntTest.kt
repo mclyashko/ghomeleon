@@ -2,6 +2,7 @@ package ru.mirea.ghomeleon.testint
 
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.test.annotation.DirtiesContext
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.DynamicPropertyRegistry
 import org.springframework.test.context.DynamicPropertySource
@@ -12,6 +13,7 @@ import org.testcontainers.junit.jupiter.Testcontainers
 @Testcontainers
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 abstract class BaseIntTest {
     companion object {

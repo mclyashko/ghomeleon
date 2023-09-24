@@ -4,7 +4,7 @@ import org.springframework.stereotype.Repository
 import ru.mirea.ghomeleon.db.platform.entity.PlatformEntity
 import ru.mirea.ghomeleon.db.platform.repository.PlatformRepository
 import ru.mirea.ghomeleon.domain.platform.Platform
-import ru.mirea.ghomeleon.usecase.platform.declaration.PlatformExtractor
+import ru.mirea.ghomeleon.usecase.platform.declaration.acess.PlatformExtractor
 import kotlin.jvm.optionals.getOrNull
 
 @Repository

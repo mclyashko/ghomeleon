@@ -12,7 +12,8 @@ internal fun Game.toGameInfoDto(): GameInfo = GameInfo(
     },
     releases = releases.map { release ->
         release.toReleaseInfoDto()
-    }
+    },
+    removed = removed,
 )
 
 internal fun Game.Review.toReviewInfoDto(): GameInfo.Review = GameInfo.Review(

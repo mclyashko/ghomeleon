@@ -9,7 +9,7 @@ import ru.mirea.ghomeleon.db.game.repository.GameRepository
 import ru.mirea.ghomeleon.db.game.repository.ReleaseRepository
 import ru.mirea.ghomeleon.db.game.repository.ReviewRepository
 import ru.mirea.ghomeleon.domain.game.Game
-import ru.mirea.ghomeleon.usecase.game.declaration.GamePersister
+import ru.mirea.ghomeleon.usecase.game.declaration.acess.GamePersister
 
 @Repository
 class GamePersisterImpl(
@@ -20,18 +20,36 @@ class GamePersisterImpl(
 
     @Transactional
     override fun save(game: Game) {
-        val gameEntity = game.toGameEntity()
+        (game to game.toGameEntity())
+            .let { (game, gameEntity) ->
+                if (game.isNew()) {
+                    gameEntity.apply { isNew = true }
+                }
+                gameRepository.save(gameEntity)
+            }
 
-        val reviewEntities = game.reviews.map { review ->
-            review.toReviewEntity(gameId = game.id)
-        }
+        game.reviews.map { review -> review to review.toReviewEntity(game.id) }
+            .map { (review, reviewEntity) ->
+                if (review.isNew()) {
+                    reviewEntity.apply { isNew = true }
+                }
+                reviewEntity
+            }
+            .let { reviewEntities ->
+                reviewRepository.saveAll(reviewEntities)
+            }
 
-        val releaseEntities = game.releases.map { release ->
-            release.toReleaseEntity(gameId = game.id)
-        }
+        game.releases.map { release -> release to release.toReleaseEntity(game.id) }
+            .map { (release, releaseEntity) ->
+                if (release.isNew()) {
+                    releaseEntity.apply { isNew = true }
+                }
+                releaseEntity
+            }
+            .let { releaseEntities ->
+                releaseRepository.saveAll(releaseEntities)
+            }
 
-        gameRepository.save(gameEntity)
-        reviewRepository.saveAll(reviewEntities)
-        releaseRepository.saveAll(releaseEntities)
+        game.markPersistedCascade()
     }
 }

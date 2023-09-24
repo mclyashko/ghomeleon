@@ -5,7 +5,7 @@ import org.springframework.transaction.annotation.Transactional
 import ru.mirea.ghomeleon.db.platform.entity.extension.toPlatformEntity
 import ru.mirea.ghomeleon.db.platform.repository.PlatformRepository
 import ru.mirea.ghomeleon.domain.platform.Platform
-import ru.mirea.ghomeleon.usecase.platform.declaration.PlatformPersister
+import ru.mirea.ghomeleon.usecase.platform.declaration.acess.PlatformPersister
 
 @Repository
 class PlatformPersisterImpl(
@@ -14,8 +14,14 @@ class PlatformPersisterImpl(
 
     @Transactional
     override fun save(platform: Platform) {
-        val platformEntity = platform.toPlatformEntity()
+        (platform to platform.toPlatformEntity())
+            .let { (platform, platformEntity) ->
+                if (platform.isNew()) {
+                    platformEntity.apply { isNew = true }
+                }
+                platformRepository.save(platformEntity)
+            }
 
-        platformRepository.save(platformEntity)
+        platform.markPersistedCascade()
     }
 }

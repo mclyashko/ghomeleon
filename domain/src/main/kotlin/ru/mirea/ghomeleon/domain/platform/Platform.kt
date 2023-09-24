@@ -10,10 +10,11 @@ import kotlin.jvm.Throws
 
 class Platform internal constructor(
     id: Id,
+    isNew: Boolean,
     val name: Name,
     val releaseDate: ReleaseDate,
     val manufacturer: Manufacturer,
-) : AggregateRoot<Platform.Id>(id = id) {
+) : AggregateRoot<Platform.Id>(id = id, isNew = isNew) {
 
     var removed: Boolean = false
         internal set
@@ -82,6 +83,7 @@ class Platform internal constructor(
 
             return Platform(
                 id = id,
+                isNew = true,
                 name = name,
                 releaseDate = releaseDate,
                 manufacturer = manufacturer,
@@ -97,6 +99,7 @@ class Platform internal constructor(
         ): Platform {
             return Platform(
                 id = id,
+                isNew = false,
                 name = name,
                 releaseDate = releaseDate,
                 manufacturer = manufacturer,
@@ -104,5 +107,9 @@ class Platform internal constructor(
                 this.removed = removed
             }
         }
+    }
+
+    override fun markPersistedCascade() {
+        isNew = false
     }
 }

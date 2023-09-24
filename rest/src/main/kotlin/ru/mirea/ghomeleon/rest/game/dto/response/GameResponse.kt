@@ -33,6 +33,11 @@ data class GameResponse(
         type = "release[]",
     )
     val releases: List<Release>,
+    @field:Schema(
+        description = "Is game removed",
+        type = "boolean"
+    )
+    val removed: Boolean,
 ) {
     @Schema(description = "Model for the game review.")
     data class Review(
