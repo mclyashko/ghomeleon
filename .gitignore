@@ -66,3 +66,6 @@ Temporary Items
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+/env/prometheus/prom_data/
+/env/grafana/gf_data/
+/env/postgres/pg_data/

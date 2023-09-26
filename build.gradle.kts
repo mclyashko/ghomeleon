@@ -45,6 +45,7 @@ subprojects {
         implementation(platform(BOMs.spring_boot_bom))
         implementation(platform(BOMs.spring_cloud_bom))
         implementation(platform(BOMs.test_containers_bom))
+        implementation(platform(BOMs.micrometer_bom))
     }
 
     detekt {
