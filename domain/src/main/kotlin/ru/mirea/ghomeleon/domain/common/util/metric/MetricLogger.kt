@@ -1,6 +1,6 @@
 package ru.mirea.ghomeleon.domain.common.util.metric
 
-interface DomainMetricLogger {
+interface MetricLogger {
     fun registerCounter(name: String)
 
     companion object {

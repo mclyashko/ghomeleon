@@ -27,9 +27,6 @@ object Libs {
     const val spring_boot_starter = "org.springframework.boot:spring-boot-starter:${LibVers.spring_boot}"
     const val spring_boot_starter_web = "org.springframework.boot:spring-boot-starter-web:${LibVers.spring_boot}"
     const val spring_boot_starter_data_jdbc = "org.springframework.boot:spring-boot-starter-data-jdbc:${LibVers.spring_boot}"
-    const val spring_boot_starter_logging = "org.springframework.boot:spring-boot-starter-logging:${
-        LibVers.spring_boot
-    }"
     const val spring_boot_starter_test = "org.springframework.boot:spring-boot-starter-test:${LibVers.spring_boot}"
     const val spring_boot_starter_actuator = "org.springframework.boot:spring-boot-starter-actuator:${LibVers.spring_boot}"
     const val spring_transaction = "org.springframework:spring-tx:${LibVers.spring}"
@@ -68,9 +65,9 @@ object BOMs {
 object PluginVers {
     const val kotlin = Global.kotlin_version
     const val spring_boot = LibVers.spring_boot
-    const val detekt = "1.19.0"
+    const val detekt = "1.23.1"
     const val detekt_formatting = detekt
-    const val spring_dependency_management = "3.1.4"
+    const val spring_dependency_management = "1.1.3"
     const val spring_kotlin = Global.kotlin_version
     const val owasp_dependencies = "8.2.1"
 }
