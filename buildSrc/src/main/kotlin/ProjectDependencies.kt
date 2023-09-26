@@ -10,6 +10,7 @@ object LibVers {
     const val postgresql = "42.6.0"
     const val flyway = "9.22.2"
     const val openapi = "2.2.0"
+    const val micrometer = "1.11.4"
 }
 
 object Libs {
@@ -30,6 +31,7 @@ object Libs {
         LibVers.spring_boot
     }"
     const val spring_boot_starter_test = "org.springframework.boot:spring-boot-starter-test:${LibVers.spring_boot}"
+    const val spring_boot_starter_actuator = "org.springframework.boot:spring-boot-starter-actuator:${LibVers.spring_boot}"
     const val spring_transaction = "org.springframework:spring-tx:${LibVers.spring}"
 
     // Logging
@@ -49,12 +51,18 @@ object Libs {
 
     // Openapi
     const val openapi = "org.springdoc:springdoc-openapi-starter-webmvc-ui:${LibVers.openapi}"
+
+    // Metrics
+    const val micrometer_core = "io.micrometer:micrometer-core:${LibVers.micrometer}"
+    const val micrometer_registry_prometheus = "io.micrometer:micrometer-registry-prometheus:${LibVers.micrometer}"
+    const val micrometer_observation = "io.micrometer:micrometer-observation:${LibVers.micrometer}"
 }
 
 object BOMs {
     const val spring_boot_bom = "org.springframework.boot:spring-boot-dependencies:${LibVers.spring_boot}"
     const val spring_cloud_bom = "org.springframework.cloud:spring-cloud-dependencies:${LibVers.spring_cloud}"
     const val test_containers_bom = "org.testcontainers:testcontainers-bom:${LibVers.testcontainers}"
+    const val micrometer_bom = "io.micrometer:micrometer-bom:${LibVers.micrometer}"
 }
 
 object PluginVers {

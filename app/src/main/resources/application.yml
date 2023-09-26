@@ -15,3 +15,9 @@ spring:
 springdoc:
   swagger-ui:
     operations-sorter: method, alpha
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, metrics, prometheus

@@ -8,6 +8,7 @@ dependencies {
     implementation(project(":use-case"))
     implementation(project(":domain"))
     implementation(project(":db"))
+    implementation(project(":metric-logger"))
 
     // kotlin
     implementation(Libs.kotlin_jdk8)
