@@ -57,7 +57,7 @@ services:
     container_name: ghomeleon
     build:
       context: ../
-      dockerfile: ghomeleon/DockerfileGhomeleon
+      dockerfile: ./env/ghomeleon/DockerfileGhomeleon
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
