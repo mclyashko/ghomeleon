@@ -57,7 +57,7 @@ services:
     container_name: ghomeleon
     build:
       context: ../
-      dockerfile: ghomeleon/DockerfileGhomeleon
+      dockerfile: ./env/ghomeleon/DockerfileGhomeleon
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -73,4 +73,13 @@ services:
       retries: 5
     depends_on:
       postgres:
+        condition: service_healthy
+  adminer:
+    container_name: adminer
+    image: adminer:4.8.1
+    ports:
+      - "9090:8080"
+    restart: "no"
+    depends_on:
+      ghomeleon:
         condition: service_healthy
