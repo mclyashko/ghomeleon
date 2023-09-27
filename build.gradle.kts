@@ -53,7 +53,7 @@ subprojects {
     detekt {
         config = files("$parentProjectDir/tools/detekt/detekt-config.yml")
         buildUponDefaultConfig = true
-        source = files("src/main/kotlin", "src/test/kotlin", "src/test/gatling")
+        source = files("src/main/kotlin", "src/test/kotlin", "src/testInt/kotlin")
 
         dependencies {
             detektPlugins("${Plugins.detekt_formatting}:${PluginVers.detekt_formatting}")

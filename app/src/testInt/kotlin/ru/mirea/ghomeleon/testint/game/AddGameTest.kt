@@ -9,7 +9,6 @@ import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
 import org.springframework.test.web.servlet.post
-import ru.mirea.ghomeleon.domain.game.Game
 import ru.mirea.ghomeleon.rest.game.dto.request.AddGameReleaseRequest
 import ru.mirea.ghomeleon.rest.game.dto.request.AddGameRequest
 import ru.mirea.ghomeleon.rest.game.dto.request.AddGameReviewRequest
@@ -36,7 +35,8 @@ class AddGameTest : BaseIntTest() {
                 |after purchasing a getaway package from Tom Nook, accomplishes assigned tasks, 
                 |and develops the island as they choose. They can gather and craft items, 
                 |customize the island, and develop it into a community 
-                |of anthropomorphic animals.""".trimMargin()
+                |of anthropomorphic animals.
+            """.trimMargin()
         )
 
         val createdGameAsString = mockMvc
