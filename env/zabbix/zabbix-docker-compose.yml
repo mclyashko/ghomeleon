@@ -1,6 +1,8 @@
 
 networks:
   zabbix-network:
+  env_ghomeleon-network:
+    external: true
 
 volumes:
   zabbix-postgres:
@@ -24,6 +26,12 @@ services:
       start_period: 60s
     restart: unless-stopped
 
+  zabbix-java-gateway:
+    image: ${ZABBIX_JAVA_GATEWAY_IMAGE_TAG}
+    networks:
+      - zabbix-network
+      - env_ghomeleon-network
+
   zabbix-server:
     image: ${ZABBIX_SERVER_IMAGE_TAG}
     environment:
@@ -32,6 +40,10 @@ services:
       POSTGRES_DB: ${ZABBIX_DB_NAME}
       POSTGRES_USER: ${ZABBIX_DB_USER}
       POSTGRES_PASSWORD: ${ZABBIX_DB_PASSWORD}
+      ZBX_JAVAGATEWAY_ENABLE: true
+      ZBX_JAVAGATEWAY: zabbix-java-gateway
+      ZBX_JAVAGATEWAYPORT: 10052
+      ZBX_STARTJAVAPOLLERS: 5
     networks:
       - zabbix-network
     healthcheck:
