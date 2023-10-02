@@ -7,6 +7,8 @@ object LibVers {
     const val testcontainers = "1.19.0"
     const val jackson = "2.15.2"
     const val slf4j = "2.0.9"
+    const val logback = "1.4.11"
+    const val kotlin_logging = "3.0.5"
     const val postgresql = "42.6.0"
     const val flyway = "9.22.2"
     const val openapi = "2.2.0"
@@ -33,6 +35,9 @@ object Libs {
 
     // Logging
     const val slf4j_api = "org.slf4j:slf4j-api:${LibVers.slf4j}"
+    const val logback_classic = "ch.qos.logback:logback-classic:${LibVers.logback}"
+    const val logback_core = "ch.qos.logback:logback-core:${LibVers.logback}"
+    const val kotlin_logging = "io.github.microutils:kotlin-logging-jvm:${LibVers.kotlin_logging}"
 
     // Tests
     const val junit_params = "org.junit.jupiter:junit-jupiter-params:${LibVers.junit}"

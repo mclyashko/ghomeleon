@@ -17,6 +17,9 @@ dependencies {
     // openapi
     implementation(Libs.openapi)
 
+    // logging
+    implementation(Libs.kotlin_logging)
+
     // tests
     testImplementation(Libs.junit_params)
     testRuntimeOnly(Libs.junit_engine)
