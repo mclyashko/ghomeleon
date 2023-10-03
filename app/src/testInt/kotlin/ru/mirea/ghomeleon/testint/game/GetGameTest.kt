@@ -11,7 +11,6 @@ import org.springframework.test.web.servlet.get
 import ru.mirea.ghomeleon.rest.game.dto.response.GameResponse
 import ru.mirea.ghomeleon.testint.BaseIntTest
 
-
 class GetGameTest : BaseIntTest() {
 
     @Autowired

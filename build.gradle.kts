@@ -3,6 +3,7 @@ val parentProjectDir = projectDir
 plugins {
     id(Plugins.kotlin) version PluginVers.kotlin apply false
     id(Plugins.detekt) version PluginVers.detekt
+    id(Plugins.spring_dependency_management) version PluginVers.spring_dependency_management
     id(Plugins.owasp_dependencies) version PluginVers.owasp_dependencies
 }
 
@@ -31,6 +32,7 @@ subprojects {
         plugin(Plugins.kotlin)
         plugin(Plugins.detekt)
         plugin("jacoco")
+        plugin(Plugins.spring_dependency_management)
         plugin(Plugins.owasp_dependencies)
     }
 
@@ -51,7 +53,7 @@ subprojects {
     detekt {
         config = files("$parentProjectDir/tools/detekt/detekt-config.yml")
         buildUponDefaultConfig = true
-        source = files("src/main/kotlin", "src/test/kotlin", "src/test/gatling")
+        source = files("src/main/kotlin", "src/test/kotlin", "src/testInt/kotlin")
 
         dependencies {
             detektPlugins("${Plugins.detekt_formatting}:${PluginVers.detekt_formatting}")

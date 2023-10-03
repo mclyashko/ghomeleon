@@ -7,6 +7,9 @@ object LibVers {
     const val testcontainers = "1.19.0"
     const val jackson = "2.15.2"
     const val slf4j = "2.0.9"
+    const val logback = "1.4.11"
+    const val logback_gelf = "4.0.2"
+    const val kotlin_logging = "3.0.5"
     const val postgresql = "42.6.0"
     const val flyway = "9.22.2"
     const val openapi = "2.2.0"
@@ -27,15 +30,16 @@ object Libs {
     const val spring_boot_starter = "org.springframework.boot:spring-boot-starter:${LibVers.spring_boot}"
     const val spring_boot_starter_web = "org.springframework.boot:spring-boot-starter-web:${LibVers.spring_boot}"
     const val spring_boot_starter_data_jdbc = "org.springframework.boot:spring-boot-starter-data-jdbc:${LibVers.spring_boot}"
-    const val spring_boot_starter_logging = "org.springframework.boot:spring-boot-starter-logging:${
-        LibVers.spring_boot
-    }"
     const val spring_boot_starter_test = "org.springframework.boot:spring-boot-starter-test:${LibVers.spring_boot}"
     const val spring_boot_starter_actuator = "org.springframework.boot:spring-boot-starter-actuator:${LibVers.spring_boot}"
     const val spring_transaction = "org.springframework:spring-tx:${LibVers.spring}"
 
     // Logging
     const val slf4j_api = "org.slf4j:slf4j-api:${LibVers.slf4j}"
+    const val logback_classic = "ch.qos.logback:logback-classic:${LibVers.logback}"
+    const val logback_core = "ch.qos.logback:logback-core:${LibVers.logback}"
+    const val logback_gelf = "de.siegmar:logback-gelf:${LibVers.logback_gelf}"
+    const val kotlin_logging = "io.github.microutils:kotlin-logging-jvm:${LibVers.kotlin_logging}"
 
     // Tests
     const val junit_params = "org.junit.jupiter:junit-jupiter-params:${LibVers.junit}"
@@ -68,9 +72,9 @@ object BOMs {
 object PluginVers {
     const val kotlin = Global.kotlin_version
     const val spring_boot = LibVers.spring_boot
-    const val detekt = "1.19.0"
+    const val detekt = "1.23.1"
     const val detekt_formatting = detekt
-    const val spring_dependency_management = "3.1.4"
+    const val spring_dependency_management = "1.1.3"
     const val spring_kotlin = Global.kotlin_version
     const val owasp_dependencies = "8.2.1"
 }
