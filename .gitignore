@@ -69,3 +69,7 @@ replay_pid*
 /env/prometheus/prom_data/
 /env/grafana/gf_data/
 /env/postgres/pg_data/
+/env/mongodb/mongo_data/
+/env/opensearch/opch_data/
+/env/graylog/gr_data/
+/env/graylog/gr_journal/

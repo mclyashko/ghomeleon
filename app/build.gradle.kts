@@ -25,6 +25,7 @@ dependencies {
     implementation(Libs.slf4j_api)
     implementation(Libs.logback_classic)
     implementation(Libs.logback_core)
+    implementation(Libs.logback_gelf)
     implementation(Libs.kotlin_logging)
 
     // tests
