@@ -15,3 +15,7 @@ spring:
 springdoc:
   swagger-ui:
     operations-sorter: method, alpha
+
+logging:
+  level:
+    root: off
