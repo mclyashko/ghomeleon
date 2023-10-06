@@ -1,5 +1,8 @@
 version: "3.9"
 
+networks:
+  ghomeleon-network:
+
 services:
   mongodb:
     container_name: mongodb
@@ -85,6 +88,8 @@ services:
     volumes:
       - ./prometheus/prom_config:/etc/prometheus
       - ./prometheus/prom_data:/prometheus
+    networks:
+      - ghomeleon-network
     command:
       - "--config.file=/etc/prometheus/prometheus.yml"
     restart: "no"
@@ -105,6 +110,8 @@ services:
     environment:
       - GF_SECURITY_ADMIN_USER=${GF_SECURITY_ADMIN_USER}
       - GF_SECURITY_ADMIN_PASSWORD=${GF_SECURITY_ADMIN_PASSWORD}
+    networks:
+      - ghomeleon-network
     ports:
       - "3000:3000"
     restart: "no"
@@ -125,6 +132,8 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
+    networks:
+      - ghomeleon-network
     restart: "no"
     healthcheck:
       test: pg_isready -d ${POSTGRES_DB} -U ${POSTGRES_USER}
@@ -144,8 +153,11 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_URL: ${POSTGRES_URL}
       POSTGRES_DB: ${POSTGRES_DB}
+    networks:
+      - ghomeleon-network
     ports:
       - "8080:8080"
+      - "9095:9095"
     restart: "no"
     healthcheck:
       test: curl --fail --silent localhost:8080/actuator/health | grep UP || exit 1
@@ -158,6 +170,8 @@ services:
   adminer:
     container_name: adminer
     image: adminer:4.8.1
+    networks:
+      - ghomeleon-network
     ports:
       - "9090:8080"
     restart: "no"

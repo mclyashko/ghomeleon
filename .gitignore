@@ -73,3 +73,4 @@ replay_pid*
 /env/opensearch/opch_data/
 /env/graylog/gr_data/
 /env/graylog/gr_journal/
+/env/zabbix/zabbix_pg_data/
