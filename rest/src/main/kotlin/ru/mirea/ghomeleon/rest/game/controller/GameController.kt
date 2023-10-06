@@ -1,5 +1,6 @@
 package ru.mirea.ghomeleon.rest.game.controller
 
+import mu.KotlinLogging
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -30,6 +31,8 @@ import ru.mirea.ghomeleon.usecase.game.declaration.query.GetAllGames
 import ru.mirea.ghomeleon.usecase.game.declaration.query.GetGameById
 import ru.mirea.ghomeleon.usecase.game.declaration.query.GetGameByName
 
+private val log = KotlinLogging.logger { }
+
 @RestController
 @RequestMapping("/api")
 @Suppress("LongParameterList")
@@ -58,6 +61,9 @@ class GameController(
     override fun getGameById(
         @RequestParam id: Long
     ): ResponseEntity<GameResponse> {
+        log.info {
+            "getGameById with id $id"
+        }
         return ResponseEntity.ok(
             getGameById
                 .execute(id = Game.Id(id))
@@ -69,6 +75,9 @@ class GameController(
     override fun getGameByName(
         @RequestParam name: String
     ): ResponseEntity<GameResponse> {
+        log.info {
+            "getGameByName with name $name"
+        }
         return ResponseEntity.ok(
             getGameByName
                 .execute(name = Game.Name(name))
@@ -80,6 +89,9 @@ class GameController(
     override fun addNewGame(
         @RequestBody addGameRequest: AddGameRequest
     ): ResponseEntity<GameResponse> {
+        log.info {
+            "addGameRequest with addGameRequest $addGameRequest"
+        }
         return ResponseEntity.ok(
             addNewGame
                 .execute(addGameInfo = addGameRequest.toAddGameInfo())
@@ -92,6 +104,9 @@ class GameController(
         @RequestParam id: Long,
         @RequestBody addGameReviewRequest: AddGameReviewRequest
     ): ResponseEntity<GameResponse> {
+        log.info {
+            "addNewGameReview with id $id addGameReviewRequest $addGameReviewRequest"
+        }
         return ResponseEntity.ok(
             addNewGameReviewById
                 .execute(
@@ -107,6 +122,9 @@ class GameController(
         @RequestParam id: Long,
         @RequestBody addGameReleaseRequest: AddGameReleaseRequest
     ): ResponseEntity<GameResponse> {
+        log.info {
+            "addNewGameRelease with id $id addGameReleaseRequest $addGameReleaseRequest"
+        }
         return ResponseEntity.ok(
             addNewGameReleaseById
                 .execute(
@@ -122,6 +140,9 @@ class GameController(
         @RequestParam id: Long,
         @RequestBody updateGameRequest: UpdateGameRequest
     ): ResponseEntity<GameResponse> {
+        log.info {
+            "updateGame with id $id updateGameRequest $updateGameRequest"
+        }
         return ResponseEntity.ok(
             updateGameById
                 .execute(
@@ -136,6 +157,9 @@ class GameController(
     override fun removeGame(
         @RequestParam id: Long
     ): ResponseEntity<GameResponse> {
+        log.info {
+            "updateGame with id $id"
+        }
         return ResponseEntity.ok(
             removeGameById
                 .execute(id = Game.Id(id))

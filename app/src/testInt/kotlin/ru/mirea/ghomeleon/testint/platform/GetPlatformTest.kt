@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
-import ru.mirea.ghomeleon.rest.game.dto.response.GameResponse
 import ru.mirea.ghomeleon.rest.platform.dto.response.PlatformResponse
 import ru.mirea.ghomeleon.testint.BaseIntTest
 

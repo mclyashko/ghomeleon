@@ -21,6 +21,13 @@ dependencies {
     // jackson
     implementation(Libs.jackson_kotlin)
 
+    // logging
+    implementation(Libs.slf4j_api)
+    implementation(Libs.logback_classic)
+    implementation(Libs.logback_core)
+    implementation(Libs.logback_gelf)
+    implementation(Libs.kotlin_logging)
+
     // tests
     testImplementation(Libs.junit_params)
     testImplementation(Libs.spring_boot_starter_test)
