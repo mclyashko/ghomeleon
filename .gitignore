@@ -69,3 +69,4 @@ replay_pid*
 /env/prometheus/prom_data/
 /env/grafana/gf_data/
 /env/postgres/pg_data/
+/env/zabbix/zabbix_pg_data/

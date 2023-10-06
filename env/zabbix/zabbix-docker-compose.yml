@@ -1,17 +1,15 @@
+version: "3.9"
 
 networks:
   zabbix-network:
   env_ghomeleon-network:
     external: true
 
-volumes:
-  zabbix-postgres:
-
 services:
   postgres:
     image: ${ZABBIX_POSTGRES_IMAGE_TAG}
     volumes:
-      - zabbix-postgres:/var/lib/postgresql/data
+      - ./zabbix_pg_data:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: ${ZABBIX_DB_NAME}
       POSTGRES_USER: ${ZABBIX_DB_USER}
@@ -25,13 +23,11 @@ services:
       retries: 3
       start_period: 60s
     restart: unless-stopped
-
   zabbix-java-gateway:
     image: ${ZABBIX_JAVA_GATEWAY_IMAGE_TAG}
     networks:
       - zabbix-network
       - env_ghomeleon-network
-
   zabbix-server:
     image: ${ZABBIX_SERVER_IMAGE_TAG}
     environment:
@@ -56,7 +52,6 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-
   zabbix-dashboard:
     image: ${ZABBIX_WEB_IMAGE_TAG}
     environment:
@@ -83,7 +78,6 @@ services:
         condition: service_healthy
       zabbix-server:
         condition: service_healthy
-
   zabbix-agent:
     image: ${ZABBIX_AGENT_IMAGE_TAG}
     environment:
