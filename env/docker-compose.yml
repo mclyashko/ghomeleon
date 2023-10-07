@@ -7,6 +7,8 @@ services:
   mongodb:
     container_name: mongodb
     image: mongo:7.0.2
+    networks:
+      - ghomeleon-network
     volumes:
       - ./mongodb/mongo_data:/data/db
     restart: "no"
@@ -25,6 +27,8 @@ services:
       - "action.auto_create_index=false"
       - "plugins.security.ssl.http.enabled=false"
       - "plugins.security.disabled=true"
+    networks:
+      - ghomeleon-network
     ulimits:
       memlock:
         hard: -1
@@ -60,6 +64,8 @@ services:
       GRAYLOG_ELASTICSEARCH_HOSTS: "http://opensearch:9200"
       GRAYLOG_MONGODB_URI: "mongodb://mongodb:27017/graylog"
     entrypoint: "/usr/bin/tini -- wait-for-it opensearch:9200 --  /docker-entrypoint.sh"
+    networks:
+      - ghomeleon-network
     ports:
       - "5044:5044/tcp"   # Beats
       - "5140:5140/udp"   # Syslog
